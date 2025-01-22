@@ -589,7 +589,8 @@ func (d *Driver) createSubDir(vol *lustreVolume, mountPath, subDirPath string, m
 }
 
 func getSourceString(mgsIPAddress, azureLustreName string) string {
-	return fmt.Sprintf("%s@tcp:/%s", mgsIPAddress, azureLustreName)
+	// remove lnet protocol prefix e.g. tcp, io2b
+	return fmt.Sprintf("%s:/%s", mgsIPAddress, azureLustreName)
 }
 
 func getInternalMountPath(workingMountDir, mountPath string) (string, error) {
